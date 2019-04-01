@@ -14,8 +14,10 @@
 <ul class="sectlevel2">
 <li><a href="#viewing-help-code-help-code">2.1. Viewing help : <code>help</code></a></li>
 <li><a href="#adding-a-module-code-add-code">2.2. Adding a module: <code>add</code></a></li>
-<li><a href="#generating-a-learning-schedule-interleave-code-coming-in-v2-0-code">2.3. Generating a learning schedule: 'interleave' <code>[coming in v2.0]</code></a></li>
-<li><a href="#compare-two-time-table-tablecompare">2.4. Compare two time table: 'tablecompare'</a></li>
+<li><a href="#adding-an-event-to-the-event-calendar-code-addevent-code">2.3. Adding an event to the event calendar : <code>addevent</code></a></li>
+<li><a href="#listing-all-events-code-listevent-code">2.4. Listing all events : <code>listevent</code></a></li>
+<li><a href="#generating-a-learning-schedule-interleave-code-coming-in-v2-0-code">2.5. Generating a learning schedule: 'interleave' <code>[coming in v2.0]</code></a></li>
+<li><a href="#compare-two-time-table-tablecompare-code-coming-in-v2-0-code">2.6. Compare two time table: 'tablecompare' <code>[coming in v2.0]</code></a></li>
 </ul>
 </li>
 </ul>
@@ -131,7 +133,38 @@ A person can have any number of tags (including 0)
 </div>
 </div>
 <div class="sect2">
-<h3 id="generating-a-learning-schedule-interleave-code-coming-in-v2-0-code"><a class="link" href="#generating-a-learning-schedule-interleave-code-coming-in-v2-0-code">2.3. Generating a learning schedule: 'interleave' <code>[coming in v2.0]</code></a></h3>
+<h3 id="adding-an-event-to-the-event-calendar-code-addevent-code"><a class="link" href="#adding-an-event-to-the-event-calendar-code-addevent-code">2.3. Adding an event to the event calendar : <code>addevent</code></a></h3>
+<div class="paragraph">
+<p>Adds an event to the event calendar.
+Format: addevent ett/TITLE ed/DATE etm/TIME ev/VENUE \[eta/AUDIENCE] \[edc/DRESSCODE] \[eds/DESCRIPTION]</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Target audience, dress code and description are not compulsory. Event can still be added to the calendar without these attributes.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Examples:
+* addevent ett/UBS - Unlock Your Potential with us ed/01/04/2019 etm/15:00-16:00 ev/UBS Office eta/All Year 1 female students edc/Business Formal eds/Unlock Your Potential with us.
+* addevent ett/Career Festival ed/05/06/2019 etm/10:00-12:00 ev/MPSH</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="listing-all-events-code-listevent-code"><a class="link" href="#listing-all-events-code-listevent-code">2.4. Listing all events : <code>listevent</code></a></h3>
+<div class="paragraph">
+<p>Shows a list of all events in the event calendar and show it in the left pane of the application.
+Format: listevent</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="generating-a-learning-schedule-interleave-code-coming-in-v2-0-code"><a class="link" href="#generating-a-learning-schedule-interleave-code-coming-in-v2-0-code">2.5. Generating a learning schedule: 'interleave' <code>[coming in v2.0]</code></a></h3>
 <div class="paragraph">
 <p>Generates a learning schedule based on the modules in the storage. A calendar week view will appear in the GUI as seen above in Section 2.
 User would be able to generate a timetable based on the concept of interleaving.
@@ -142,43 +175,43 @@ as most exams lasts 2 hours and occurring from either 9am-11am, 1pm-3pm and 5pm-
 Format: interleave</p>
 </div>
 <div class="sect3">
-<h4 id="generate-a-interleaved-schedule-based-on-module-codes-code-coming-in-v-code"><a class="link" href="#generate-a-interleaved-schedule-based-on-module-codes-code-coming-in-v-code">2.3.1. Generate a interleaved schedule based on module codes <code>[coming in v?.?]</code></a></h4>
+<h4 id="generate-a-interleaved-schedule-based-on-module-codes-code-coming-in-v-code"><a class="link" href="#generate-a-interleaved-schedule-based-on-module-codes-code-coming-in-v-code">2.5.1. Generate a interleaved schedule based on module codes <code>[coming in v?.?]</code></a></h4>
 <div class="paragraph">
 <p>Interleave each module with 30 mins blocks. Assume each module has 3 hours self study.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="include-breaks-between-focus-periods-code-coming-in-v-code"><a class="link" href="#include-breaks-between-focus-periods-code-coming-in-v-code">2.3.2. Include breaks between focus periods. <code>[coming in v?.?]</code></a></h4>
+<h4 id="include-breaks-between-focus-periods-code-coming-in-v-code"><a class="link" href="#include-breaks-between-focus-periods-code-coming-in-v-code">2.5.2. Include breaks between focus periods. <code>[coming in v?.?]</code></a></h4>
 
 </div>
 <div class="sect3">
-<h4 id="allow-30-mins-focus-period-value-2-hours-code-coming-in-v-code"><a class="link" href="#allow-30-mins-focus-period-value-2-hours-code-coming-in-v-code">2.3.3. Allow 30 mins &#8656; focus period value &#8656; 2 hours. <code>[coming in v?.?]</code></a></h4>
+<h4 id="allow-30-mins-focus-period-value-2-hours-code-coming-in-v-code"><a class="link" href="#allow-30-mins-focus-period-value-2-hours-code-coming-in-v-code">2.5.3. Allow 30 mins &#8656; focus period value &#8656; 2 hours. <code>[coming in v?.?]</code></a></h4>
 
 </div>
 <div class="sect3">
-<h4 id="input-module-workloads-for-interleaving-code-coming-in-v-code"><a class="link" href="#input-module-workloads-for-interleaving-code-coming-in-v-code">2.3.4. Input module workloads for interleaving. <code>[coming in v?.?]</code></a></h4>
+<h4 id="input-module-workloads-for-interleaving-code-coming-in-v-code"><a class="link" href="#input-module-workloads-for-interleaving-code-coming-in-v-code">2.5.4. Input module workloads for interleaving. <code>[coming in v?.?]</code></a></h4>
 
 </div>
 <div class="sect3">
-<h4 id="input-module-codes-and-timetable-automatically-interleaved-from-data-from-cors-code-coming-in-v-code"><a class="link" href="#input-module-codes-and-timetable-automatically-interleaved-from-data-from-cors-code-coming-in-v-code">2.3.5. Input module codes and timetable automatically interleaved from data from CORs. <code>[coming in v?.?]</code></a></h4>
+<h4 id="input-module-codes-and-timetable-automatically-interleaved-from-data-from-cors-code-coming-in-v-code"><a class="link" href="#input-module-codes-and-timetable-automatically-interleaved-from-data-from-cors-code-coming-in-v-code">2.5.5. Input module codes and timetable automatically interleaved from data from CORs. <code>[coming in v?.?]</code></a></h4>
 
 </div>
 <div class="sect3">
-<h4 id="sign-in-with-student-id-and-timetable-automatically-interleaved-from-data-from-cors-code-coming-in-v-code"><a class="link" href="#sign-in-with-student-id-and-timetable-automatically-interleaved-from-data-from-cors-code-coming-in-v-code">2.3.6. Sign in with student ID and timetable automatically interleaved from data from CORs <code>[coming in v?.?]</code></a></h4>
+<h4 id="sign-in-with-student-id-and-timetable-automatically-interleaved-from-data-from-cors-code-coming-in-v-code"><a class="link" href="#sign-in-with-student-id-and-timetable-automatically-interleaved-from-data-from-cors-code-coming-in-v-code">2.5.6. Sign in with student ID and timetable automatically interleaved from data from CORs <code>[coming in v?.?]</code></a></h4>
 
 </div>
 <div class="sect3">
-<h4 id="use-the-app-to-collect-data-anonymously-on-students-users-code-coming-in-v-code"><a class="link" href="#use-the-app-to-collect-data-anonymously-on-students-users-code-coming-in-v-code">2.3.7. Use the app to collect data anonymously on students users. <code>[coming in v?.?]</code></a></h4>
+<h4 id="use-the-app-to-collect-data-anonymously-on-students-users-code-coming-in-v-code"><a class="link" href="#use-the-app-to-collect-data-anonymously-on-students-users-code-coming-in-v-code">2.5.7. Use the app to collect data anonymously on students users. <code>[coming in v?.?]</code></a></h4>
 <div class="paragraph">
 <p>Extract academic performance indicators anonymously from school database, then convert all these data into an analysable format for data analysis, trend finding etc.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="implement-something-to-help-students-extend-their-focus-period-to-maximum-setting-code-coming-in-v-code"><a class="link" href="#implement-something-to-help-students-extend-their-focus-period-to-maximum-setting-code-coming-in-v-code">2.3.8. Implement something to help students extend their focus period to maximum setting.  <code>[coming in v?.?]</code></a></h4>
+<h4 id="implement-something-to-help-students-extend-their-focus-period-to-maximum-setting-code-coming-in-v-code"><a class="link" href="#implement-something-to-help-students-extend-their-focus-period-to-maximum-setting-code-coming-in-v-code">2.5.8. Implement something to help students extend their focus period to maximum setting.  <code>[coming in v?.?]</code></a></h4>
 
 </div>
 <div class="sect3">
-<h4 id="viewing-learning-schedule-for-a-specific-day-dayview"><a class="link" href="#viewing-learning-schedule-for-a-specific-day-dayview">2.3.9. Viewing learning schedule for a specific day: 'dayview'</a></h4>
+<h4 id="viewing-learning-schedule-for-a-specific-day-code-dayview-code-code-coming-in-v2-0-code"><a class="link" href="#viewing-learning-schedule-for-a-specific-day-code-dayview-code-code-coming-in-v2-0-code">2.5.9. Viewing learning schedule for a specific day: <code>dayview</code> <code>[coming in v2.0]</code></a></h4>
 <div class="paragraph">
 <p>Switches the calendar view from week view to day view on a specific date. Can only be done after generate is called.
 Format: dayview DD/MM/YYYY
@@ -186,7 +219,7 @@ Example: dayview 11/02/2019</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="listing-all-schedule-for-a-specific-day-daylist"><a class="link" href="#listing-all-schedule-for-a-specific-day-daylist">2.3.10. Listing all schedule for a specific day: 'daylist'</a></h4>
+<h4 id="listing-all-schedule-for-a-specific-day-code-daylist-code-code-coming-in-v2-0-code"><a class="link" href="#listing-all-schedule-for-a-specific-day-code-daylist-code-code-coming-in-v2-0-code">2.5.10. Listing all schedule for a specific day: <code>daylist</code> <code>[coming in v2.0]</code></a></h4>
 <div class="paragraph">
 <p>Lists down all tasks for one particular day in a list format (and not calendar view).
 Can only be done after generate is called.Format: daylist DD/MM/YYYY
@@ -194,28 +227,28 @@ Example: daylist 11/02/2019</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="clearing-all-schedule-clear"><a class="link" href="#clearing-all-schedule-clear">2.3.11. Clearing all schedule: 'clear'</a></h4>
+<h4 id="clearing-all-schedule-clear-code-coming-in-v2-0-code"><a class="link" href="#clearing-all-schedule-clear-code-coming-in-v2-0-code">2.5.11. Clearing all schedule: 'clear' <code>[coming in v2.0]</code></a></h4>
 <div class="paragraph">
 <p>Clears the learning schedule and deletes all existing modules in the database.
 Format: clear</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="undoing-previous-command-undo"><a class="link" href="#undoing-previous-command-undo">2.3.12. Undoing previous command: 'undo'</a></h4>
+<h4 id="undoing-previous-command-undo-code-coming-in-v2-0-code"><a class="link" href="#undoing-previous-command-undo-code-coming-in-v2-0-code">2.5.12. Undoing previous command: 'undo' <code>[coming in v2.0]</code></a></h4>
 <div class="paragraph">
 <p>Restores the learning schedule to the state before the previous undoable command was executed.
 Format: undo</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="redoing-previous-command-redo"><a class="link" href="#redoing-previous-command-redo">2.3.13. Redoing previous command: 'redo'</a></h4>
+<h4 id="redoing-previous-command-redo-code-coming-in-v2-0-code"><a class="link" href="#redoing-previous-command-redo-code-coming-in-v2-0-code">2.5.13. Redoing previous command: 'redo' <code>[coming in v2.0]</code></a></h4>
 <div class="paragraph">
 <p>Reverses the most recent undo command.
 Format: redo</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="exiting-the-program-exit"><a class="link" href="#exiting-the-program-exit">2.3.14. Exiting the program: 'exit'</a></h4>
+<h4 id="exiting-the-program-exit"><a class="link" href="#exiting-the-program-exit">2.5.14. Exiting the program: 'exit'</a></h4>
 <div class="paragraph">
 <p>Exits the Efficient Learning Scheduler.
 Format: exit</p>
@@ -223,7 +256,7 @@ Format: exit</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="compare-two-time-table-tablecompare"><a class="link" href="#compare-two-time-table-tablecompare">2.4. Compare two time table: 'tablecompare'</a></h3>
+<h3 id="compare-two-time-table-tablecompare-code-coming-in-v2-0-code"><a class="link" href="#compare-two-time-table-tablecompare-code-coming-in-v2-0-code">2.6. Compare two time table: 'tablecompare' <code>[coming in v2.0]</code></a></h3>
 <div class="paragraph">
 <p>compare two time table to find the difference
 Format:tablecompare</p>
@@ -253,7 +286,7 @@ The <code>undo</code> command fails as there are no undoable commands executed p
 </ul>
 </div>
 <div class="sect3">
-<h4 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">2.4.1. Redoing the previously undone command : <code>redo</code></a></h4>
+<h4 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">2.6.1. Redoing the previously undone command : <code>redo</code></a></h4>
 <div class="paragraph">
 <p>Reverses the most recent <code>undo</code> command.<br>
 Format: <code>redo</code></p>
@@ -285,7 +318,7 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 </div>
 </div>
 <div class="sect3">
-<h4 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">2.4.2. Clearing all entries : <code>clear</code></a></h4>
+<h4 id="clearing-all-entries-code-clear-code-code-coming-in-v2-0-code"><a class="link" href="#clearing-all-entries-code-clear-code-code-coming-in-v2-0-code">2.6.2. Clearing all entries : <code>clear</code> <code>[coming in v2.0]</code></a></h4>
 <div class="paragraph">
 <p>Clears all entries from the address book.<br>
 Alias command: 'c'<br>
@@ -294,4 +327,4 @@ Format: <code>clear</code></p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-01 13:54:22 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-01 15:41:12 UTC</div></div></div></body></html>
