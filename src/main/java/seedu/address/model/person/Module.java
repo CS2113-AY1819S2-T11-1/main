@@ -4,50 +4,66 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * New Module class
+ * Represents a Module in the address book.
+ * Guarantees: details are present and not null, field values are validated, immutable.
  */
 
 
 public class Module {
 
-    public static final String MESSAGE_CONSTRAINTS =
-            "Module should contain a 2-4 letter department code followed by a four digit course code";
-    public static final String VALIDATION_REGEX = "\\w{2,4}\\d{4}";
-    public final String value;
+    public static final String TITLE_CONSTRAINs = " TITLE SHOULD BE CAPITAL LETTERS COMBINATION";
 
-    /**
-     * Constructs a {@code Module}.
-     *
-     * @param module A valid phone number.
-     */
-    public Module(String module) {
-        requireNonNull(module);
-        checkArgument(isValidModule(module), MESSAGE_CONSTRAINTS);
-        value = module;
+    public static final String CONTENT_CONSTRAINs = "CONTENT SHOULD BE DESCRIPTION OF THE MODULE";
+
+    public static final String TITLE_VALIDATION_REGEX = "[\\p{Upper}][\\p{Digit}].*";
+
+    private String title;
+
+
+    private String content;
+
+    public Module(String title, String content) {
+
+        this.title = title;
+
+        this.content = content;
     }
 
-    /**
-     * Returns true if a given string is a valid phone number.
-     */
-    public static boolean isValidModule(String test) {
-        return test.matches(VALIDATION_REGEX);
+    public String getTitle() {
+        return this.title;
     }
 
-    @Override
-    public String toString() {
-        return value;
+
+    public String getContent() {
+        return this.content;
     }
 
-    @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof Module // instanceof handles nulls
-                && value.equals(((Module) other).value)); // state check
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    @Override
-    public int hashCode() {
-        return value.hashCode();
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public boolean isValidTitle(String test) {
+        return test.matches(TITLE_VALIDATION_REGEX);
+
+    }
+    public String toString () {
+        return getTitle() + "\n" + "\n" + getContent();
+    }
+
+    public boolean equals (Module module1, Module module2){
+        if (module1.getTitle().equals(module2.getTitle())) {
+            return true;
+        }
+        return false;
+    }
+
+    public int hashCode (String title){
+        return title.hashCode();
     }
 
 }
