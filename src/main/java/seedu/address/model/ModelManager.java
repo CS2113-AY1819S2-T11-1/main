@@ -15,8 +15,11 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.tag.Tag;
+
 
 /**
  * Represents the in-memory model of the address book data.
@@ -25,14 +28,17 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final VersionedAddressBook versionedAddressBook;
+    private final EventCalendar eventCalendar;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final SimpleObjectProperty<Person> selectedPerson = new SimpleObjectProperty<>();
+    private final FilteredList<Event> filteredEvents;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs,
+                        ReadOnlyEventCalendar eventCalendar) {
         super();
         requireAllNonNull(addressBook, userPrefs);
 
@@ -42,10 +48,13 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
         filteredPersons.addListener(this::ensureSelectedPersonIsValid);
+        this.eventCalendar = new EventCalendar(eventCalendar);
+        filteredEvents = new FilteredList<>(eventCalendar.getEventList());
+        // filteredEvents.addListener(this::ensureSelectedPersonIsValid);
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new UserPrefs(), new EventCalendar());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -81,6 +90,17 @@ public class ModelManager implements Model {
     public void setAddressBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
         userPrefs.setAddressBookFilePath(addressBookFilePath);
+    }
+
+    @Override
+    public Path getEventCalendarFilePath() {
+        return userPrefs.getEventCalendarFilePath();
+    }
+
+    @Override
+    public void setEventCalendarFilePath(Path eventCalendarFilePath) {
+        requireNonNull(eventCalendarFilePath);
+        userPrefs.setEventCalendarFilePath(eventCalendarFilePath);
     }
 
     //=========== AddressBook ================================================================================
@@ -119,6 +139,10 @@ public class ModelManager implements Model {
         versionedAddressBook.setPerson(target, editedPerson);
     }
 
+    @Override
+    public void deleteTag(Tag tag) {
+        versionedAddressBook.removeTag(tag);
+    }
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -231,5 +255,41 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(other.filteredPersons)
                 && Objects.equals(selectedPerson.get(), other.selectedPerson.get());
     }
+
+    //@@author windrichie
+    // =============Event Calendar=====================================================
+
+    @Override
+    public boolean hasEvent(Event event) {
+        requireNonNull(event);
+        return eventCalendar.hasEvent(event);
+    }
+
+    @Override
+    public void addEvent(Event event) {
+        eventCalendar.addEvent(event);
+        //updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public ReadOnlyEventCalendar getEventCalendar() {
+        return eventCalendar;
+    }
+
+    @Override
+    public void updateFilteredEventList(Predicate<Event> predicate) {
+        requireNonNull(predicate);
+        filteredEvents.setPredicate(predicate);
+    }
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Event} backed by the internal list of
+     * {@code eventCalendar}
+     */
+    @Override
+    public ObservableList<Event> getFilteredEventList() {
+        return filteredEvents;
+    }
+
 
 }
