@@ -11,9 +11,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 public class Module {
 
-    public static final String TITLE_CONSTRAINs = " TITLE SHOULD BE CAPITAL LETTERS COMBINATION";
+    public static final String TITLE_CONSTRAINS = " TITLE SHOULD BE CAPITAL LETTERS COMBINATION";
 
-    public static final String CONTENT_CONSTRAINs = "CONTENT SHOULD BE DESCRIPTION OF THE MODULE";
+    public static final String CONTENT_CONSTRAINS = "CONTENT SHOULD BE DESCRIPTION OF THE MODULE";
 
     public static final String TITLE_VALIDATION_REGEX = "[\\p{Upper}][\\p{Digit}].*";
 
@@ -27,6 +27,10 @@ public class Module {
         this.title = title;
 
         this.content = content;
+    }
+
+    public static boolean isValidModule(String trimmedModule) {
+        return true;
     }
 
     public String getTitle() {

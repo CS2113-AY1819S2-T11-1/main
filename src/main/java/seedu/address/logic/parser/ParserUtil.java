@@ -114,9 +114,9 @@ public class ParserUtil {
         requireNonNull(module);
         String trimmedModule = module.trim();
         if (!Module.isValidModule(trimmedModule)) {
-            throw new ParseException(Module.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Module.TITLE_CONSTRAINS);
         }
-        return new Module(trimmedModule);
+        return new Module(trimmedModule,trimmedModule);
     }
 
     /**
