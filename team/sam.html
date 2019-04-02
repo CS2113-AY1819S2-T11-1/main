@@ -10,7 +10,9 @@
 <h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>AddressBook - Level 4 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.</p>
+<p>This is a desktop Efficient Learning Scheduler application. It has a GUI but most of the user interactions happen using a CLI (Command Line Interface). It is a Java application targeting NUS School of Computing students who are interested to learn how to learn.
+Our efficient learning scheduler implements ALSET’s proven learning strategy such as spacing.
+We believe that with our application at your expense, you will be able to develop a good and efficient learning habit that will help you achieve your academic or career goals.</p>
 </div>
 </div>
 </div>
@@ -20,29 +22,26 @@
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Major enhancement</strong>: added <strong>the ability to undo/redo previous commands</strong></p>
+<p><strong>Major enhancement</strong>: added <strong>the ability to interleave study time</strong></p>
 <div class="ulist">
 <ul>
 <li>
-<p>What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.</p>
+<p>What it does: allows the user to interleave self study time for every modules taken.</p>
 </li>
 <li>
-<p>Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.</p>
+<p>Justification: This feature improves the product significantly because it allows the user to study efficiently.</p>
 </li>
 <li>
-<p>Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.</p>
+<p>Highlights: This enhancement is what separates this program from other timetable programs.</p>
 </li>
 <li>
-<p>Credits: <em>{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}</em></p>
+<p>Credits: Interleaving technique from ALSET.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Minor enhancement</strong>: added a history command that allows the user to navigate to previous commands using up/down keys.</p>
-</li>
-<li>
-<p><strong>Code contributed</strong>: [<a href="https://github.com">Functional code</a>] [<a href="https://github.com">Test code</a>] <em>{give links to collated code files}</em></p>
+<p><strong>Code contributed</strong>: <a href="https://nus-cs2113-ay1819s2.github.io/dashboard/#=undefined&amp;search=sameow" class="bare">https://nus-cs2113-ay1819s2.github.io/dashboard/#=undefined&amp;search=sameow</a></p>
 </li>
 <li>
 <p><strong>Other contributions</strong>:</p>
@@ -53,30 +52,7 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Managed releases <code>v1.3</code> - <code>v1.5rc</code> (3 releases) on GitHub</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Enhancements to existing features:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Updated the GUI color scheme (Pull requests <a href="https://github.com">#33</a>, <a href="https://github.com">#34</a>)</p>
-</li>
-<li>
-<p>Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests <a href="https://github.com">#36</a>, <a href="https://github.com">#38</a>)</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Documentation:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Did cosmetic tweaks to existing contents of the User Guide: <a href="https://github.com">#14</a></p>
+<p>Managed releases <code>v1.2.1</code> on GitHub</p>
 </li>
 </ul>
 </div>
@@ -94,9 +70,6 @@
 <li>
 <p>Reported bugs and suggestions for other teams in the class (examples:  <a href="https://github.com">1</a>, <a href="https://github.com">2</a>, <a href="https://github.com">3</a>)</p>
 </li>
-<li>
-<p>Some parts of the history feature I added was adopted by several other class mates (<a href="https://github.com">1</a>, <a href="https://github.com">2</a>)</p>
-</li>
 </ul>
 </div>
 </li>
@@ -105,10 +78,7 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Integrated a third party library (Natty) to the project (<a href="https://github.com">#42</a>)</p>
-</li>
-<li>
-<p>Integrated a new Github plugin (CircleCI) to the team repo</p>
+<p>Integrated a new Github plugin (Travis) to the team repo</p>
 </li>
 </ul>
 </div>
@@ -136,6 +106,54 @@
 </tr>
 </tbody>
 </table>
+<div class="sect2">
+<h3 id="generating-a-learning-schedule-interleave-code-coming-in-v2-0-code"><a class="link" href="#generating-a-learning-schedule-interleave-code-coming-in-v2-0-code">Generating a learning schedule: 'interleave' <code>[coming in v2.0]</code></a></h3>
+<div class="paragraph">
+<p>Generates a learning schedule based on the modules in the storage. A calendar week view will appear in the GUI as seen above in Section 2.
+User would be able to generate a timetable based on the concept of interleaving.
+During one of my interactions with Mr Fung from ALSET, he mentioned that students should study in settings that closely resembles exam settings.
+That was what inspired this project and feature.
+Thus, the default (and minimum) focus period is 30 mins (average human attention span) with 5 mins rest and maximum is 2 hours with 2 hours rest,
+as most exams lasts 2 hours and occurring from either 9am-11am, 1pm-3pm and 5pm-7pm.
+Format: interleave</p>
+</div>
+<div class="sect3">
+<h4 id="generate-a-interleaved-schedule-based-on-module-codes-code-coming-in-v-code"><a class="link" href="#generate-a-interleaved-schedule-based-on-module-codes-code-coming-in-v-code">Generate a interleaved schedule based on module codes <code>[coming in v?.?]</code></a></h4>
+<div class="paragraph">
+<p>Interleave each module with 30 mins blocks. Assume each module has 3 hours self study.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="include-breaks-between-focus-periods-code-coming-in-v-code"><a class="link" href="#include-breaks-between-focus-periods-code-coming-in-v-code">Include breaks between focus periods. <code>[coming in v?.?]</code></a></h4>
+
+</div>
+<div class="sect3">
+<h4 id="allow-30-mins-focus-period-value-2-hours-code-coming-in-v-code"><a class="link" href="#allow-30-mins-focus-period-value-2-hours-code-coming-in-v-code">Allow 30 mins &#8656; focus period value &#8656; 2 hours. <code>[coming in v?.?]</code></a></h4>
+
+</div>
+<div class="sect3">
+<h4 id="input-module-workloads-for-interleaving-code-coming-in-v-code"><a class="link" href="#input-module-workloads-for-interleaving-code-coming-in-v-code">Input module workloads for interleaving. <code>[coming in v?.?]</code></a></h4>
+
+</div>
+<div class="sect3">
+<h4 id="input-module-codes-and-timetable-automatically-interleaved-from-data-from-cors-code-coming-in-v-code"><a class="link" href="#input-module-codes-and-timetable-automatically-interleaved-from-data-from-cors-code-coming-in-v-code">Input module codes and timetable automatically interleaved from data from CORs. <code>[coming in v?.?]</code></a></h4>
+
+</div>
+<div class="sect3">
+<h4 id="sign-in-with-student-id-and-timetable-automatically-interleaved-from-data-from-cors-code-coming-in-v-code"><a class="link" href="#sign-in-with-student-id-and-timetable-automatically-interleaved-from-data-from-cors-code-coming-in-v-code">Sign in with student ID and timetable automatically interleaved from data from CORs <code>[coming in v?.?]</code></a></h4>
+
+</div>
+<div class="sect3">
+<h4 id="use-the-app-to-collect-data-anonymously-on-students-users-code-coming-in-v-code"><a class="link" href="#use-the-app-to-collect-data-anonymously-on-students-users-code-coming-in-v-code">Use the app to collect data anonymously on students users. <code>[coming in v?.?]</code></a></h4>
+<div class="paragraph">
+<p>Extract academic performance indicators anonymously from school database, then convert all these data into an analysable format for data analysis, trend finding etc.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implement-something-to-help-students-extend-their-focus-period-to-maximum-setting-code-coming-in-v-code"><a class="link" href="#implement-something-to-help-students-extend-their-focus-period-to-maximum-setting-code-coming-in-v-code">Implement something to help students extend their focus period to maximum setting.  <code>[coming in v?.?]</code></a></h4>
+
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -151,6 +169,133 @@
 </tr>
 </tbody>
 </table>
+<div class="sect2">
+<h3 id="generate-interleaved-schedule"><a class="link" href="#generate-interleaved-schedule">Generate interleaved schedule</a></h3>
+<div class="sect3">
+<h4 id="future-implementation"><a class="link" href="#future-implementation">Future implementation</a></h4>
+<div class="paragraph">
+<p>The scheduling is facilitated by <code>interleaver</code>, consisting of the following operations.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>ExtractSelfStudyHours()</code>&#8201;&#8212;&#8201;extract all self study hours.</p>
+</li>
+<li>
+<p><code>split()</code>&#8201;&#8212;&#8201;split hours into 30 mins blocks.</p>
+</li>
+<li>
+<p><code>interleave()</code>&#8201;&#8212;&#8201; interleave blocks.</p>
+</li>
+<li>
+<p><code>generate()</code>&#8201;&#8212;&#8201; for each block, insert them into free time slots.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Given below is a activity diagram showing how the methods above work together:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/interleavingActivityDiagram.png" alt="interleavingActivityDiagram" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>The Sequence Diagram below shows how the components interact with each other for the scenario where the user issues the command <code>interleave</code>.
+Maximum 10 modules, until integration with CORs</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/interleaveCompo.png" alt="interleaveCompo" width="800">
+</div>
+<div class="title">Figure 1. Component interactions for <code>interleave</code> command</div>
+</div>
+<div class="paragraph">
+<p>The Sequence Diagram below shows the interactions within the <code>Logic</code> component for the <code>interleave()</code> API call.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/logicCompoForInterleave.png" alt="logicCompoForInterleave" width="800">
+</div>
+<div class="title">Figure 2. Interactions Inside the Logic Component for the <code>interleave</code> Command</div>
+</div>
+<div class="paragraph">
+<p>Use the unmodifiable ObservableList&lt;Person&gt; in Model.java to update UI?
+Save the scheduler data in json format (Storage.java) and read it back?</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-how-to-split-hours"><a class="link" href="#aspect-how-to-split-hours">Aspect: How to split hours</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Split into 30 mins blocks.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement.</p>
+</li>
+<li>
+<p>Cons: Some people might find 30 mins to be too long/short.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Let user decide duration of each block.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: More flexibility.</p>
+</li>
+<li>
+<p>Cons: Harder to implement.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-how-to-train-users-to-study-with-maximum-focus-period-setting"><a class="link" href="#aspect-how-to-train-users-to-study-with-maximum-focus-period-setting">Aspect: How to train users to study with maximum focus period setting.</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Progressive training.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Increase in focus period weekly, starting from minimum settings.</p>
+</li>
+<li>
+<p>Users should be comfortable with 1 hour focus periods by mid semester, to help with midterms.</p>
+</li>
+<li>
+<p>Continue increasing to maximum setting for finals.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="logging"><a class="link" href="#logging">Logging</a></h4>
+<div class="paragraph">
+<p>We are using java.util.logging package for logging. The LogsCenter class is used to manage the logging levels and logging destinations. The logging level can be controlled using the logLevel setting in the configuration file. The Logger for a class can be obtained using LogsCenter.getLogger(Class) which will log messages according to the specified logging level. Currently log messages are output through: Console and to a .log file.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="configuration"><a class="link" href="#configuration">Configuration</a></h4>
+<div class="paragraph">
+<p>Certain properties of the application can be controlled (e.g user prefs file location, logging level) through the configuration file (default: config.json).</p>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -161,4 +306,4 @@
 <p><em>{Optionally, you may include other projects in your portfolio.}</em></p>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-01 15:55:31 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-02 14:21:10 UTC</div></div></div></body></html>
