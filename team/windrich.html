@@ -1,7 +1,7 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>Windrich - Project Portfolio</title><link rel="stylesheet" href="../stylesheets/gh-pages.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="seedu-header"><nav class="navbar navbar-lg navbar-light bg-lighter"><div class="container"><a class="navbar-brand" href="https://se-edu.github.io/"><img src="../images/SeEduLogo.png" alt="SE-EDU"></a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level1">AB-1</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level2">AB-2</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level3">AB-3</a></li><li class="nav-item"><a class="nav-link active" href="../index.html">AB-4</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/collate">Collate</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/se-book">Book</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/learningresources">Resources</a></li></ul></div></nav></div><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="../index.html">AddressBook-Level4</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="../UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="../DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="../LearningOutcomes.html">LOs</a></li><li class="nav-item"><a class="nav-link active" href="../AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="../ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/se-edu/addressbook-level4"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Windrich - Project Portfolio</h1></div><div id="content"><div class="sect1">
-<h2 id="project-addressbook-level-4"><a class="link" href="#project-addressbook-level-4">PROJECT: AddressBook - Level 4</a></h2>
+<h2 id="project-efficient-learning-scheduler"><a class="link" href="#project-efficient-learning-scheduler">PROJECT: Efficient Learning Scheduler</a></h2>
 <div class="sectionbody">
 <hr>
 </div>
@@ -10,7 +10,9 @@
 <h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>AddressBook - Level 4 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.</p>
+<p>Efficient Learning Scheduler is a desktop application targeting NUS School of Computing (SoC) students who wish to improve their learning schedule. It is especially useful for students who tend to do last-minute studying for exams and are not able to manage their busy schedules to include incremental learning throughout a semester.
+Users interact with the application using a CLI and it has a GUI which is created using JavaFX. It is written in Java. Our scheduler implements Insitute for Application of Learning Science and Educational Technology (ALSET)'s learning strategy such as spacing.
+Users can also keep track of the events in NUS such as recruitment talks or career festival which might interest of the users.</p>
 </div>
 </div>
 </div>
@@ -20,26 +22,39 @@
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Major enhancement</strong>: added <strong>the ability to undo/redo previous commands</strong></p>
+<p><strong>Major enhancement</strong>: added <strong>the event calendar component to the application, including <code>AddEvent</code>, <code>ListEvent</code>, and <code>CheckAvailEvent</code> [Coming in v2.0] Command.</strong></p>
 <div class="ulist">
 <ul>
 <li>
-<p>What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.</p>
+<p>What it does: allows users to keep track of the interesting events happening in NUS and check whether they are available to attend the event.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>When a user is interested in an event in NUS, he/she can add the event with the relevant details such as title, time, date and venue to the application by the <code>addevent</code> command.</p>
 </li>
 <li>
-<p>Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.</p>
+<p>Next, he/she can use the <code>checkavailevent</code> [Coming in v2.0] command to check whether there is anything that clashes with the event.</p>
 </li>
 <li>
-<p>Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.</p>
-</li>
-<li>
-<p>Credits: <em>{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}</em></p>
+<p>Alternatively, if he/she wants to look at a list of interesting events (previously stored events), the <code>listevent</code> command will list the events at the left pane of the GUI.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Minor enhancement</strong>: added a history command that allows the user to navigate to previous commands using up/down keys.</p>
+<p>Justification: This feature improves the product because an NUS SoC student should keep up to date to the events happening in NUS which may be beneficial to him/her in the future.</p>
+</li>
+<li>
+<p>Highlights: This enhancement requires adding many classes in all 4 components of the application - Logic, Model, UI and Storage, thus it requires me to have a good understanding of the whole application.</p>
+</li>
+<li>
+<p>Credits: Regex expression for date including leap years validation from online library.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Minor enhancement</strong>: included checking for the user inputs for certain attributes of <code>AddEvent</code> command, such as time (has to contain start time and end time), date and title.</p>
 </li>
 <li>
 <p><strong>Code contributed</strong>: [<a href="https://github.com">Functional code</a>] [<a href="https://github.com">Test code</a>] <em>{give links to collated code files}</em></p>
@@ -53,23 +68,13 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Managed releases <code>v1.3</code> - <code>v1.5rc</code> (3 releases) on GitHub</p>
+<p>Managed release <code>v1.3</code> on GitHub</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
 <p>Enhancements to existing features:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Updated the GUI color scheme (Pull requests <a href="https://github.com">#33</a>, <a href="https://github.com">#34</a>)</p>
-</li>
-<li>
-<p>Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests <a href="https://github.com">#36</a>, <a href="https://github.com">#38</a>)</p>
-</li>
-</ul>
-</div>
 </li>
 <li>
 <p>Documentation:</p>
@@ -88,15 +93,6 @@
 <li>
 <p>PRs reviewed (with non-trivial review comments): <a href="https://github.com">#12</a>, <a href="https://github.com">#32</a>, <a href="https://github.com">#19</a>, <a href="https://github.com">#42</a></p>
 </li>
-<li>
-<p>Contributed to forum discussions (examples:  <a href="https://github.com">1</a>, <a href="https://github.com">2</a>, <a href="https://github.com">3</a>, <a href="https://github.com">4</a>)</p>
-</li>
-<li>
-<p>Reported bugs and suggestions for other teams in the class (examples:  <a href="https://github.com">1</a>, <a href="https://github.com">2</a>, <a href="https://github.com">3</a>)</p>
-</li>
-<li>
-<p>Some parts of the history feature I added was adopted by several other class mates (<a href="https://github.com">1</a>, <a href="https://github.com">2</a>)</p>
-</li>
 </ul>
 </div>
 </li>
@@ -105,10 +101,7 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Integrated a third party library (Natty) to the project (<a href="https://github.com">#42</a>)</p>
-</li>
-<li>
-<p>Integrated a new Github plugin (CircleCI) to the team repo</p>
+<p>Integrated a Github plugin (Netlify) to the project [<a href="https://www.netlify.com/">Link</a>]</p>
 </li>
 </ul>
 </div>
@@ -117,9 +110,6 @@
 </div>
 </li>
 </ul>
-</div>
-<div class="paragraph">
-<p><em>{you can add/remove categories in the list above}</em></p>
 </div>
 </div>
 </div>
@@ -136,6 +126,37 @@
 </tr>
 </tbody>
 </table>
+<div class="sect2">
+<h3 id="adding-an-event-to-the-event-calendar-code-addevent-code"><a class="link" href="#adding-an-event-to-the-event-calendar-code-addevent-code">Adding an event to the event calendar : <code>addevent</code></a></h3>
+<div class="paragraph">
+<p>Adds an event to the event calendar.
+Format: addevent ett/TITLE ed/DATE etm/TIME ev/VENUE \[eta/AUDIENCE] \[edc/DRESSCODE] \[eds/DESCRIPTION]</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Target audience, dress code and description are not compulsory. Event can still be added to the calendar without these attributes.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Examples:
+* addevent ett/UBS - Unlock Your Potential with us ed/01/04/2019 etm/15:00-16:00 ev/UBS Office eta/All Year 1 female students edc/Business Formal eds/Unlock Your Potential with us.
+* addevent ett/Career Festival ed/05/06/2019 etm/10:00-12:00 ev/MPSH</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="listing-all-events-code-listevent-code"><a class="link" href="#listing-all-events-code-listevent-code">Listing all events : <code>listevent</code></a></h3>
+<div class="paragraph">
+<p>Shows a list of all events in the event calendar and show it in the left pane of the application.
+Format: listevent</p>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -151,14 +172,81 @@
 </tr>
 </tbody>
 </table>
-</div>
-</div>
-<div class="sect1">
-<h2 id="project-powerpointlabs"><a class="link" href="#project-powerpointlabs">PROJECT: PowerPointLabs</a></h2>
-<div class="sectionbody">
-<hr>
+<div class="sect2">
+<h3 id="check-availability-for-events-feature"><a class="link" href="#check-availability-for-events-feature">Check Availability for Events feature</a></h3>
+<div class="sect3">
+<h4 id="current-implementation"><a class="link" href="#current-implementation">Current Implementation</a></h4>
 <div class="paragraph">
-<p><em>{Optionally, you may include other projects in your portfolio.}</em></p>
+<p>This is a feature to check if the current user’s schedule has any clashes with a particular event in NUS.
+This is executed by getting the time and date of the event that user is interested in. This time and date will then be used to check if the user has any events or other commitments scheduled during the particular time slot. The program will then print on the Command Box whether the user is available to attend that event.</p>
+</div>
+<div class="paragraph">
+<p>Given below is an example usage scenario and how the availability checking mechanism behaves at each step:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Step 1.</strong> User opens the application and views the upcoming events in NUS for the week of 18th March. UI will show a calendar view of the NUS events</p>
+</li>
+<li>
+<p><strong>Step 2.</strong> User chooses an event that he/she is interested in. User executes the <code>checkAvailE</code> command</p>
+</li>
+<li>
+<p><strong>Step 3.</strong> The time and date of the event is stored in an <code>eventTimeDate</code> object.</p>
+</li>
+<li>
+<p><strong>Step 4.</strong> Get the user’s <code>Schedule</code> from the json storage file.</p>
+</li>
+<li>
+<p><strong>Step 5.</strong> Using the <code>eventTimeDate</code> object, check if there is any event scheduled during the event timing.</p>
+</li>
+<li>
+<p><strong>Step 6.</strong> Print the availability (whether user can attend the event) into the Command Box.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The following activity diagram summarizes what happens when a user executes the command:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/CheckAvailEActivityDiagram.png" alt="CheckAvailEActivityDiagram" width="800">
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-02 15:22:10 UTC</div></div></div></body></html>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design considerations:</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> check availability for one particular event</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: checking mechanism is faster, because we are only interested in 1 particular slot and no need to use the results display part of the UI</p>
+</li>
+<li>
+<p>Cons: troublesome if user wants to check for more than 1 event</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> check availability for the whole week</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: user can check availability for the whole week (more than 1 event at one time)</p>
+</li>
+<li>
+<p>Cons: checking mechanism is longer and need to change the view of the result display (implementation is harder)</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-02 15:33:51 UTC</div></div></div></body></html>
