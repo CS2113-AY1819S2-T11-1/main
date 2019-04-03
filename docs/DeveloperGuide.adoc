@@ -233,21 +233,34 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-//tag::generate[]
+//tag::interleave[]
 === Generate interleaved schedule
 ==== Future implementation
 
-The scheduling is facilitated by interleaver.
+The scheduling is facilitated by `interleaver`, consisting of the following operations.
 
 * `ExtractSelfStudyHours()` -- extract all self study hours.
 * `split()` -- split hours into 30 mins blocks.
 * `interleave()` --  interleave blocks.
 * `generate()` --  for each block, insert them into free time slots.
 
-These operations are exposed in the Model interface.
-Given below is a sequence diagram:
+Given below is a activity diagram showing how the methods above work together:
 
 image::interleavingActivityDiagram.png[width="800"]
+
+The Sequence Diagram below shows how the components interact with each other for the scenario where the user issues the command `interleave`.
+Maximum 10 modules, until integration with CORs
+
+.Component interactions for `interleave` command
+image::interleaveCompo.png[width="800"]
+
+The Sequence Diagram below shows the interactions within the `Logic` component for the `interleave()` API call.
+
+.Interactions Inside the Logic Component for the `interleave` Command
+image::logicCompoForInterleave.png[width="800"]
+
+Use the unmodifiable ObservableList<Person> in Model.java to update UI?
+Save the scheduler data in json format (Storage.java) and read it back?
 
 ==== Design Considerations
 ===== Aspect: How to split hours
@@ -259,11 +272,19 @@ image::interleavingActivityDiagram.png[width="800"]
 ** Pros: More flexibility.
 ** Cons: Harder to implement.
 
+===== Aspect: How to train users to study with maximum focus period setting.
+
+* **Alternative 1 (current choice):** Progressive training.
+** Increase in focus period weekly, starting from minimum settings.
+** Users should be comfortable with 1 hour focus periods by mid semester, to help with midterms.
+** Continue increasing to maximum setting for finals.
+
 ==== Logging
 We are using java.util.logging package for logging. The LogsCenter class is used to manage the logging levels and logging destinations. The logging level can be controlled using the logLevel setting in the configuration file. The Logger for a class can be obtained using LogsCenter.getLogger(Class) which will log messages according to the specified logging level. Currently log messages are output through: Console and to a .log file.
 
 ==== Configuration
 Certain properties of the application can be controlled (e.g user prefs file location, logging level) through the configuration file (default: config.json).
+//end::interleave[]
 
 //tag::checkAvailability[]
 === Check Availability between Students Feature
@@ -312,7 +333,7 @@ image::CheckAvailability.png[width="800"]
 
 ===== Certain properties of the application can be controlled (e.g user prefs file location, logging level) through the configuration file (default: `config.json`).
 
-//tag::checkAvailabilityEvents[]
+// tag::checkAvailabilityEvents[]
 === Check Availability for Events feature
 
 ==== Current Implementation
@@ -342,6 +363,7 @@ image::CheckAvailEActivityDiagram.png[width="800"]
 * **Alternative 2:** check availability for the whole week
 ** Pros: user can check availability for the whole week (more than 1 event at one time)
 ** Cons: checking mechanism is longer and need to change the view of the result display (implementation is harder)
+// end::checkAvailabilityEvents[]
 
 == Documentation
 
