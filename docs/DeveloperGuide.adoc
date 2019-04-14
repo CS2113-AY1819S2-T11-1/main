@@ -872,7 +872,7 @@ _{More to be added}_
 [appendix]
 == Use Cases
 
-(For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
+(For all use cases below, the *System* is the `Efficient Learnching Scheduler` and the *Actor* is the `user`, unless specified otherwise)
 
 [discrete]
 === Use case: Generate a time table
@@ -901,6 +901,31 @@ Use case ends.
 +
 Use case resumes at step 2.
 
+== Use case: add the activity
+
+*MSS*
+
+1. User Request the add the activity
+2. App shows that the related activity is added to the list
+3. Person with new time table is also added with this activity
++
+Use case ends
+
+== Use case:list activity
+
+*MSS*
+
+1. User request the list the activity added
+2. Typing the command 'ListActivityCommand' and the activity will be listed
++
+Use case ends
+
+== Use case: Interleave
+
+1. User request the focus period of each person
+2. Type in the static method 'interleave' to return the focus period
++
+Use case ends
 
 _{More to be added}_
 
