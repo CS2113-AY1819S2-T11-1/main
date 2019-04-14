@@ -30,7 +30,7 @@
 <li><a href="#implementation">3. Implementation</a>
 <ul class="sectlevel2">
 <li><a href="#generate-interleaved-schedule">3.1. Generate interleaved schedule</a></li>
-<li><a href="#check-availability-between-students-feature">3.2. Check Availability between Students Feature</a></li>
+<li><a href="#this-feature-adds-an-activity-to-the-student-s-timetable">3.2. This feature adds an activity to the Student&#8217;s timetable.</a></li>
 <li><a href="#check-availability-for-events-feature">3.3. Check Availability for Events feature</a></li>
 </ul>
 </li>
@@ -77,8 +77,7 @@
 <li><a href="#instructions-for-manual-testing">Appendix I: Instructions for Manual Testing</a>
 <ul class="sectlevel2">
 <li><a href="#launch-and-shutdown">I.1. Launch and Shutdown</a></li>
-<li><a href="#deleting-a-person">I.2. Deleting a person</a></li>
-<li><a href="#saving-data">I.3. Saving data</a></li>
+<li><a href="#add-an-activity-to-a-person">I.2. Add an activity to a person.</a></li>
 </ul>
 </li>
 </ul>
@@ -694,15 +693,12 @@ Save the scheduler data in json format (Storage.java) and read it back?</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="check-availability-between-students-feature"><a class="link" href="#check-availability-between-students-feature">3.2. Check Availability between Students Feature</a></h3>
+<h3 id="this-feature-adds-an-activity-to-the-student-s-timetable"><a class="link" href="#this-feature-adds-an-activity-to-the-student-s-timetable">3.2. This feature adds an activity to the Student&#8217;s timetable.</a></h3>
 <div class="sect3">
 <h4 id="current-implementation"><a class="link" href="#current-implementation">3.2.1. Current Implementation</a></h4>
 <div class="paragraph">
-<p>The check availability mechanism is facilitated by Efficient Learning Scheduler. It extends Efficient Learning Scheduler Scheduling with a free time slot list for two students, stored internally for each person instance.
-These operations are exposed in the Model interface as Model#getAvailability.</p>
-</div>
-<div class="paragraph">
-<p>Given below is an example usage scenario and how the Check availability behaves at each step.</p>
+<p>The addActivity mechanism adds a new activity to the students timetable whenever there&#8217;s a free time slot. This is executed by inserting time, date and name for a particular activity, then the addActivityCommand parser facilitates the addition of the new activity to a 2d array that stores activities.
+Given below is an example usage scenario and how the Check availability behaves at each step.</p>
 </div>
 <div class="ulist">
 <ul>
@@ -710,22 +706,19 @@ These operations are exposed in the Model interface as Model#getAvailability.
 <p><strong>Step 1.</strong> The user launches the application for the first time.</p>
 </li>
 <li>
-<p><strong>Step 2.</strong> The user executes creates a schedule, inputting his modules and CCA’s.</p>
+<p><strong>Step 2.</strong> The user adds a person to the timetable.</p>
 </li>
 <li>
-<p><strong>Step 3.</strong> The Efficient Learning Scheduler generates a schedule for said student.</p>
+<p><strong>Step 3.</strong> The user executes the addActivity command which requires a day(integer value from 0-6), a time (integer value from 0 - 48) and the name of the activity.</p>
 </li>
 <li>
-<p><strong>Step 4.</strong> The Efficient Learning Scheduler generates a list of free time slots for the student.</p>
+<p><strong>Step 4.</strong> The Efficient Learning Scheduler through the addActivityCommandParser, then checks if that slot is available then proceeds to add the activity.</p>
 </li>
 <li>
-<p><strong>Step 5.</strong> The student wants to find available meeting times with another student, in accordance to the Efficient Study Scheduler.</p>
+<p><strong>Step 5.</strong> The activity is added to a 2 dimensional array, whose rows represent the day of the week and columns represent the 30 minute block within a day.</p>
 </li>
 <li>
-<p><strong>Step 6.</strong> The compare method compares the free slots available between the two students, and compounds the two lists into a single list of times.</p>
-</li>
-<li>
-<p><strong>Step 7.</strong> The list of available times is displayed to the user.</p>
+<p><strong>Step 6.</strong> A success message is then displayed to the user in the Command box.</p>
 </li>
 </ul>
 </div>
@@ -738,11 +731,11 @@ These operations are exposed in the Model interface as Model#getAvailability.
 <div class="sect3">
 <h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.2.2. Design Considerations</a></h4>
 <div class="sect4">
-<h5 id="aspect-how-check-availability-executes"><a class="link" href="#aspect-how-check-availability-executes">Aspect: How check availability executes</a></h5>
+<h5 id="aspect-how-addactivity-executes"><a class="link" href="#aspect-how-addactivity-executes">Aspect: How addActivity executes</a></h5>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Saves a list of empty time slots for each user.</p>
+<p><strong>Alternative 1 (current choice):</strong> Edits the persons current timetable.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -755,11 +748,11 @@ These operations are exposed in the Model interface as Model#getAvailability.
 </div>
 </li>
 <li>
-<p><strong>Alternative 2:</strong> Compares the time table of two people after it’s generated, then finds available slots.</p>
+<p><strong>Alternative 2:</strong> Generates a new timetable whenever the user adds something to it.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Will use less memory.</p>
+<p>Pros: Will use more memory.</p>
 </li>
 <li>
 <p>Cons: May have a higher running time depending on how convoluted the schedule is.</p>
@@ -771,41 +764,38 @@ These operations are exposed in the Model interface as Model#getAvailability.
 </div>
 </div>
 <div class="sect4">
-<h5 id="aspect-data-structure-to-support-the-checkavailability-command"><a class="link" href="#aspect-data-structure-to-support-the-checkavailability-command">Aspect: Data structure to support the checkAvailability Command</a></h5>
+<h5 id="aspect-data-structure-to-support-the-addactivity-command"><a class="link" href="#aspect-data-structure-to-support-the-addactivity-command">Aspect: Data structure to support the addActivity Command</a></h5>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Use an ArrayList to store the empty time slots of the students.</p>
+<p><strong>Alternative 1 (current choice):</strong> Use a 2d Array of fixed size for each array.</p>
 <div class="ulist">
 <ul>
 <li>
 <p>Pros: Easy to implement and understand.</p>
 </li>
 <li>
-<p>Cons: Multiple lists are created and it wastes space.</p>
+<p>Cons: Null spaces in the array consume unnecessary space.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Alternative 2:</strong> Use a hashMap to store students who have available times together.</p>
+<p><strong>Alternative 2:</strong> Use a hashMap with days representing the Key, and the values being the hours in the day.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Everything is stored in a single data structure.</p>
+<p>Pros: Null spaces are avoided.</p>
 </li>
 <li>
-<p>Cons: HashMap might become convoluted.</p>
+<p>Cons: HashMap is harder to implement.
+===== Certain properties of the application can be controlled (e.g user prefs file location, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </li>
 </ul>
 </div>
 </li>
 </ul>
 </div>
-</div>
-<div class="sect4">
-<h5 id="certain-properties-of-the-application-can-be-controlled-e-g-user-prefs-file-location-logging-level-through-the-configuration-file-default-code-config-json-code"><a class="link" href="#certain-properties-of-the-application-can-be-controlled-e-g-user-prefs-file-location-logging-level-through-the-configuration-file-default-code-config-json-code">Certain properties of the application can be controlled (e.g user prefs file location, logging level) through the configuration file (default: <code>config.json</code>).</a></h5>
-
 </div>
 </div>
 </div>
@@ -2011,7 +2001,7 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>has a need to manage a significant number of contacts</p>
+<p>has a need to manage personal study schedule</p>
 </li>
 <li>
 <p>prefer desktop apps over other types</p>
@@ -2028,7 +2018,7 @@ for <code>RemarkCommandParser</code>.</p>
 </ul>
 </div>
 <div class="paragraph">
-<p><strong>Value proposition</strong>: manage contacts faster than a typical mouse/GUI driven app</p>
+<p><strong>Value proposition</strong>: manages timetable faster than a typical mouse/GUI driven app</p>
 </div>
 </div>
 </div>
@@ -2087,14 +2077,62 @@ for <code>RemarkCommandParser</code>.</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">student</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">view my sleeping patterns</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">be advised better on when to sleep.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">student</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">view available internships</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">I know what jobs to apply for.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">student</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">form groups with other people in the class</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">collaborate more efficiently.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">student</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">get a suggested list of modules</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">know how to prepare for next semester.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">student</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">view a video on the importance of learning concepts</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">learn more efficiently</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">student</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">modify my timetable</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">update my schedule when plans change.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">existing/expert user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">find websites</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">get free pdfs of textbooks for mods.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">professor</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">collect data</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">analyze how students learn</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">student</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">practice questions</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Study for modules on the app.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">student</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">view the mods I&#8217;m taking this semester</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">prepare more efficiently for classes.</p></td>
 </tr>
 </tbody>
 </table>
@@ -2144,19 +2182,6 @@ for <code>RemarkCommandParser</code>.</p>
 <p>Use case ends.</p>
 </div>
 </li>
-<li>
-<p>3a. The given index is invalid.</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>3a1. AddressBook shows an error message.</p>
-<div class="paragraph">
-<p>Use case resumes at step 2.</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
 </ul>
 </div>
 <div class="paragraph">
@@ -2199,10 +2224,10 @@ the timetable for the specific module</p>
 <p>1a.Module class- extract data from ALSET database, Module Class will be the subclass of TimeSlot</p>
 </li>
 <li>
-<p>2a.TimeSlot Class - contain Module class</p>
+<p>2a.Activity Class - stores modules as activities in the User&#8217;s timetable.</p>
 </li>
 <li>
-<p>3a.TimeTable Class-contain all the TimeSlots,generate the timeTable</p>
+<p>3a.TimeTable Class-contain all the activities in the user&#8217;s timetable.</p>
 </li>
 </ul>
 </div>
@@ -2229,20 +2254,25 @@ the timetable for the specific module</p>
 <div id="ALSET" class="paragraph">
 <p>ALSET aims to become a leading hub for learning science and education technology research in Asia, and a provider of impactful programming to support lifelong learning. For more info, visit <a href="http://nus.edu.sg/alset/index.html" class="bare">http://nus.edu.sg/alset/index.html</a></p>
 </div>
-<div class="paragraph">
-<p>[[Value proposition:]]
-Help NUS students learn in the most efficient way by helping them generate an efficient studying schedule</p>
-</div>
-<div class="paragraph">
-<p>[[Problem Scope]]</p>
-</div>
-<div class="paragraph">
-<p>[[Work Patterns]]
-Work Alone</p>
-</div>
-<div class="paragraph">
-<p>[[Target Users]]
-NUS students who prefer typing to create a schedule.</p>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a id="value-proposition"></a> Value proposition</dt>
+<dd>
+<p>Help NUS students learn in the most efficient way by helping them generate an efficient studying schedule</p>
+</dd>
+<dt class="hdlist1"><a id="problem-scope"></a> Problem scope</dt>
+<dd>
+<p>NUS Students who are lazy and would like to check their schedule through the CLI.</p>
+</dd>
+<dt class="hdlist1"><a id="work-patterns"></a> Work patterns</dt>
+<dd>
+<p>Work Alone</p>
+</dd>
+<dt class="hdlist1"><a id="target-users"></a> Target users</dt>
+<dd>
+<p>NUS students who prefer typing to create a schedule.</p>
+</dd>
+</dl>
 </div>
 </div>
 </div>
@@ -2340,26 +2370,26 @@ Expected: The most recent window size and location is retained.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-a-person"><a class="link" href="#deleting-a-person">I.2. Deleting a person</a></h3>
+<h3 id="add-an-activity-to-a-person"><a class="link" href="#add-an-activity-to-a-person">I.2. Add an activity to a person.</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Deleting a person while all persons are listed</p>
+<p>adds an activity to a persons Timetable.</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
 <p>Prerequisites: List all persons using the <code>list</code> command. Multiple persons in the list.</p>
 </li>
 <li>
-<p>Test case: <code>delete 1</code><br>
-Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.</p>
+<p>Test case: <code>addActivity 1 act/CS2113 day/0 time/13</code>
+Expected: an activity 'CS2113' to the first person in the Efficient learning scheduler.</p>
 </li>
 <li>
-<p>Test case: <code>delete 0</code><br>
-Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.</p>
+<p>Test case: <code>addActivity 0 act/CS2113 day/0 time/130</code><br>
+Expected: No activity is added to anyone. Error details shown in the status message.</p>
 </li>
 <li>
-<p>Other incorrect delete commands to try: <code>delete</code>, <code>delete x</code> (where x is larger than the list size) <em>{give more}</em><br>
+<p>Other incorrect addActivity commands to try: <code>addActivity</code>, <code>addActivity x</code> (where x is larger than the list size) <em>{give more}</em><br>
 Expected: Similar to previous.</p>
 </li>
 </ol>
@@ -2367,29 +2397,6 @@ Expected: Similar to previous.</p>
 </li>
 </ol>
 </div>
-<div class="paragraph">
-<p><em>{ more test cases &#8230;&#8203; }</em></p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="saving-data"><a class="link" href="#saving-data">I.3. Saving data</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Dealing with missing/corrupted data files</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p><em>{explain how to simulate a missing/corrupted file and the expected behavior}</em></p>
-</li>
-</ol>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><em>{ more test cases &#8230;&#8203; }</em></p>
-</div>
-</div>
-</div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-14 15:14:27 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-14 15:23:47 UTC</div></div></div></body></html>
