@@ -226,22 +226,22 @@ This is executed by getting the time and date of the event that user is interest
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Step 1.</strong> User opens the application and views the upcoming events in NUS for the week of 18th March. UI will show a calendar view of the NUS events</p>
+<p><strong>Step 1.</strong> User opens the application and views the upcoming events in NUS for the week of 18th March.</p>
 </li>
 <li>
-<p><strong>Step 2.</strong> User chooses an event that he/she is interested in. User executes the <code>checkAvailE</code> command</p>
+<p><strong>Step 2.</strong> User chooses an event that he/she is interested in. User executes the <code>checkAvailEvent</code> command</p>
 </li>
 <li>
-<p><strong>Step 3.</strong> The time and date of the event is stored in an <code>eventTimeDate</code> object.</p>
+<p><strong>Step 3.</strong> The time and date of the event is stored in a <code>Time</code> and a <code>Date</code> object.</p>
 </li>
 <li>
-<p><strong>Step 4.</strong> Get the user’s <code>Schedule</code> from the json storage file.</p>
+<p><strong>Step 4.</strong> Get the user’s <code>Timetable</code> array from the Model component of the application.</p>
 </li>
 <li>
-<p><strong>Step 5.</strong> Using the <code>eventTimeDate</code> object, check if there is any event scheduled during the event timing.</p>
+<p><strong>Step 5.</strong> Using the <code>Time</code> and <code>Date</code> object, get the corresponding day and time and check if there is any activity scheduled during the event timing in the user&#8217;s timetable.</p>
 </li>
 <li>
-<p><strong>Step 6.</strong> Print the availability (whether user can attend the event) into the Command Box.</p>
+<p><strong>Step 6.</strong> Print the availability (whether the user can attend the event) into the Command Box.</p>
 </li>
 </ul>
 </div>
@@ -280,6 +280,82 @@ This is executed by getting the time and date of the event that user is interest
 </li>
 <li>
 <p>Cons: checking mechanism is longer and need to change the view of the result display (implementation is harder)</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="list-activity-feature"><a class="link" href="#list-activity-feature">List Activity feature</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">Current Implementation</a></h4>
+<div class="paragraph">
+<p>This is a feature to list the activities of a person within the current week.
+This is executed by getting the index of the person from the input command. Using this index, the corresponding person&#8217;s timetable will be extracted. For every time slot in the timetable, if there is an activity scheduled, show it in the left pane of the application UI.</p>
+</div>
+<div class="paragraph">
+<p>Given below is an example usage scenario and how the listing activity mechanism works at each step:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Step 1.</strong> User opens the application and finds his/her index in the list of persons in the application.</p>
+</li>
+<li>
+<p><strong>Step 2.</strong> User executes the <code>listactivity PERSON_INDEX</code> command.</p>
+</li>
+<li>
+<p><strong>Step 3.</strong> Using the person index, extract person and get the person&#8217;s <code>Timetable</code> array from the Model component.</p>
+</li>
+<li>
+<p><strong>Step 4.</strong> Iterate through the 2D <code>Timetable</code> array and check for each of the time slot.</p>
+</li>
+<li>
+<p><strong>Step 5.</strong> If there is an activity scheduled in each of the time slot, add it to the activityList.</p>
+</li>
+<li>
+<p><strong>Step 6.</strong> For each of the activity in the activityList, creates an ActivityCard in the UI component and shows it in the left panel of the application UI.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The following activity diagram summarizes what happens when a user executes the command:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/ListActivityDiagram.png" alt="ListActivityDiagram" width="800">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">Design considerations:</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> create one ActivityListPanel (UI component) for each person in the database</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: easy to implement and easy to access</p>
+</li>
+<li>
+<p>Cons: might take up more memory space because of the ActivityListPanel List in the UI component (MainWindow)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> create one ActivityListPanel and contains the activities of every person in the database</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: takes up less memory</p>
+</li>
+<li>
+<p>Cons: harder to implement, need to filter the activities by a specific person every time ListActivity command is called.</p>
 </li>
 </ul>
 </div>
@@ -1778,9 +1854,6 @@ Expected: The most recent window size and location is retained.</p>
 </li>
 </ol>
 </div>
-<div class="paragraph">
-<p><em>{ more test cases &#8230;&#8203; }</em></p>
-</div>
 </div>
 <div class="sect2">
 <h3 id="add-an-activity-to-a-person"><a class="link" href="#add-an-activity-to-a-person">Add an activity to a person.</a></h3>
@@ -1811,124 +1884,35 @@ Expected: Similar to previous.</p>
 </ol>
 </div>
 </div>
+<div class="sect2">
+<h3 id="adding-an-event"><a class="link" href="#adding-an-event">Adding an event</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Adding an event to the event calendar</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: <code>addevent ett/UBS - Unlock Your Potential with us ed/01/04/2019 etm/15:00-16:00 ev/UBS Office</code>
+Expected: the event will be successfully added even though there are some missing input arguments, because the rest of the arguments are optional.</p>
+</li>
+<li>
+<p>Test case: <code>addevent ett/UBS - Unlock Your Potential with us ed/01/04/2019 etm/15:00-16:00 eta/All Year 1 female students edc/Business Formal eds/Unlock Your Potential with us.</code>
+Expected: the event will not be successfully added because the <code>ev/</code> argument which is compulsory is missing.</p>
+</li>
+<li>
+<p>Test case: <code>addevent ett/UBS - Unlock Your Potential with us ed/29/02/2019 etm/15:00-16:00 ev/UBS Office</code>
+Expected: the error message will be shown indicating wrong date (there is no 29th February in 2019).</p>
+</li>
+<li>
+<p>Other incorrect addevent commands to try: starting time without end time, impossible time (HH more than 24 and MM more than 60)
+Expected: the error message will be shown indicating wrong time.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
 </div>
 </div>
-<div class="sect1">
-<h2 id="user-stories-2"><a class="link" href="#user-stories-2">Appendix J: User Stories</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Priorities: High (must have) - <code>* * *</code>, Medium (nice to have) - <code>* *</code>, Low (unlikely to have) - <code>*</code></p>
 </div>
-<table class="tableblock frame-all grid-all" style="width: 59%;">
-<colgroup>
-<col style="width: 22%;">
-<col style="width: 23%;">
-<col style="width: 25%;">
-<col style="width: 30%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Priority</th>
-<th class="tableblock halign-left valign-top">As a &#8230;&#8203;</th>
-<th class="tableblock halign-left valign-top">I want to &#8230;&#8203;</th>
-<th class="tableblock halign-left valign-top">So that I can&#8230;&#8203;</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">new user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">modify the time table</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">allow for more flexibility</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">new user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">add the modules I am taking this semester</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">have a calendar-like view of my timetable</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">new user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">choose the level of learning intensity (no of hours spent per week is based on that)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">suit my studying style</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">new user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">add the different commitments such as CCAs</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">schedule not just my studies, but my life too</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">new user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">generate study schedules by typing a command</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">learn better via interleaving/spacing</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">student</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">view my sleeping patterns</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">be advised better on when to sleep.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">student</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">view available internships</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">I know what jobs to apply for.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">student</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">form groups with other people in the class</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">collaborate more efficiently.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">student</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">get a suggested list of modules</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">know how to prepare for next semester.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">student</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">view a video on the importance of learning concepts</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">learn more efficiently</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">student</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">modify my timetable</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">update my schedule when plans change.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">existing/expert user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">find websites</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">get free pdfs of textbooks for mods.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">professor</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">collect data</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">analyze how students learn</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">student</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">practice questions</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Study for modules on the app.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">student</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">view the mods I&#8217;m taking this semester</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">prepare more efficiently for classes.</p></td>
-</tr>
-</tbody>
-</table>
-<div class="paragraph">
-<p><em>{More to be added}</em></p>
-</div>
-</div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-14 15:23:47 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-14 15:56:28 UTC</div></div></div></body></html>

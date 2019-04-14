@@ -1,6 +1,6 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>Efficient Learning Scheduler- Developer Guide</title><link rel="stylesheet" href="stylesheets/gh-pages.css">
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>Efficient Learning Scheduler - Developer Guide</title><link rel="stylesheet" href="stylesheets/gh-pages.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="seedu-header"><nav class="navbar navbar-lg navbar-light bg-lighter"><div class="container"><a class="navbar-brand" href="https://se-edu.github.io/"><img src="images/SeEduLogo.png" alt="SE-EDU"></a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level1">AB-1</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level2">AB-2</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level3">AB-3</a></li><li class="nav-item"><a class="nav-link active" href="index.html">AB-4</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/collate">Collate</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/se-book">Book</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/learningresources">Resources</a></li></ul></div></nav></div><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="index.html">AddressBook-Level4</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link active" href="DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="LearningOutcomes.html">LOs</a></li><li class="nav-item"><a class="nav-link" href="AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/se-edu/addressbook-level4"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Efficient Learning Scheduler- Developer Guide</h1></div><div id="content"><div id="preamble">
+<link rel="stylesheet" href="stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="seedu-header"><nav class="navbar navbar-lg navbar-light bg-lighter"><div class="container"><a class="navbar-brand" href="https://se-edu.github.io/"><img src="images/SeEduLogo.png" alt="SE-EDU"></a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level1">AB-1</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level2">AB-2</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level3">AB-3</a></li><li class="nav-item"><a class="nav-link active" href="index.html">AB-4</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/collate">Collate</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/se-book">Book</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/learningresources">Resources</a></li></ul></div></nav></div><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="index.html">AddressBook-Level4</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link active" href="DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="LearningOutcomes.html">LOs</a></li><li class="nav-item"><a class="nav-link" href="AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/se-edu/addressbook-level4"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Efficient Learning Scheduler - Developer Guide</h1></div><div id="content"><div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
 <p>By: <code>CS2113-AY1819S2-T11-1</code>      Since: <code>Jun 2019</code>      Licence: <code>MIT</code></p>
@@ -32,6 +32,7 @@
 <li><a href="#generate-interleaved-schedule">3.1. Generate interleaved schedule</a></li>
 <li><a href="#this-feature-adds-an-activity-to-the-student-s-timetable">3.2. This feature adds an activity to the Student&#8217;s timetable.</a></li>
 <li><a href="#check-availability-for-events-feature">3.3. Check Availability for Events feature</a></li>
+<li><a href="#list-activity-feature">3.4. List Activity feature</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -78,6 +79,7 @@
 <ul class="sectlevel2">
 <li><a href="#launch-and-shutdown">I.1. Launch and Shutdown</a></li>
 <li><a href="#add-an-activity-to-a-person">I.2. Add an activity to a person.</a></li>
+<li><a href="#adding-an-event">I.3. Adding an event</a></li>
 </ul>
 </li>
 </ul>
@@ -813,22 +815,22 @@ This is executed by getting the time and date of the event that user is interest
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Step 1.</strong> User opens the application and views the upcoming events in NUS for the week of 18th March. UI will show a calendar view of the NUS events</p>
+<p><strong>Step 1.</strong> User opens the application and views the upcoming events in NUS for the week of 18th March.</p>
 </li>
 <li>
-<p><strong>Step 2.</strong> User chooses an event that he/she is interested in. User executes the <code>checkAvailE</code> command</p>
+<p><strong>Step 2.</strong> User chooses an event that he/she is interested in. User executes the <code>checkAvailEvent</code> command</p>
 </li>
 <li>
-<p><strong>Step 3.</strong> The time and date of the event is stored in an <code>eventTimeDate</code> object.</p>
+<p><strong>Step 3.</strong> The time and date of the event is stored in a <code>Time</code> and a <code>Date</code> object.</p>
 </li>
 <li>
-<p><strong>Step 4.</strong> Get the user’s <code>Schedule</code> from the json storage file.</p>
+<p><strong>Step 4.</strong> Get the user’s <code>Timetable</code> array from the Model component of the application.</p>
 </li>
 <li>
-<p><strong>Step 5.</strong> Using the <code>eventTimeDate</code> object, check if there is any event scheduled during the event timing.</p>
+<p><strong>Step 5.</strong> Using the <code>Time</code> and <code>Date</code> object, get the corresponding day and time and check if there is any activity scheduled during the event timing in the user&#8217;s timetable.</p>
 </li>
 <li>
-<p><strong>Step 6.</strong> Print the availability (whether user can attend the event) into the Command Box.</p>
+<p><strong>Step 6.</strong> Print the availability (whether the user can attend the event) into the Command Box.</p>
 </li>
 </ul>
 </div>
@@ -867,6 +869,82 @@ This is executed by getting the time and date of the event that user is interest
 </li>
 <li>
 <p>Cons: checking mechanism is longer and need to change the view of the result display (implementation is harder)</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="list-activity-feature"><a class="link" href="#list-activity-feature">3.4. List Activity feature</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">3.4.1. Current Implementation</a></h4>
+<div class="paragraph">
+<p>This is a feature to list the activities of a person within the current week.
+This is executed by getting the index of the person from the input command. Using this index, the corresponding person&#8217;s timetable will be extracted. For every time slot in the timetable, if there is an activity scheduled, show it in the left pane of the application UI.</p>
+</div>
+<div class="paragraph">
+<p>Given below is an example usage scenario and how the listing activity mechanism works at each step:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Step 1.</strong> User opens the application and finds his/her index in the list of persons in the application.</p>
+</li>
+<li>
+<p><strong>Step 2.</strong> User executes the <code>listactivity PERSON_INDEX</code> command.</p>
+</li>
+<li>
+<p><strong>Step 3.</strong> Using the person index, extract person and get the person&#8217;s <code>Timetable</code> array from the Model component.</p>
+</li>
+<li>
+<p><strong>Step 4.</strong> Iterate through the 2D <code>Timetable</code> array and check for each of the time slot.</p>
+</li>
+<li>
+<p><strong>Step 5.</strong> If there is an activity scheduled in each of the time slot, add it to the activityList.</p>
+</li>
+<li>
+<p><strong>Step 6.</strong> For each of the activity in the activityList, creates an ActivityCard in the UI component and shows it in the left panel of the application UI.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The following activity diagram summarizes what happens when a user executes the command:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ListActivityDiagram.png" alt="ListActivityDiagram" width="800">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.4.2. Design considerations:</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> create one ActivityListPanel (UI component) for each person in the database</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: easy to implement and easy to access</p>
+</li>
+<li>
+<p>Cons: might take up more memory space because of the ActivityListPanel List in the UI component (MainWindow)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> create one ActivityListPanel and contains the activities of every person in the database</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: takes up less memory</p>
+</li>
+<li>
+<p>Cons: harder to implement, need to filter the activities by a specific person every time ListActivity command is called.</p>
 </li>
 </ul>
 </div>
@@ -2365,9 +2443,6 @@ Expected: The most recent window size and location is retained.</p>
 </li>
 </ol>
 </div>
-<div class="paragraph">
-<p><em>{ more test cases &#8230;&#8203; }</em></p>
-</div>
 </div>
 <div class="sect2">
 <h3 id="add-an-activity-to-a-person"><a class="link" href="#add-an-activity-to-a-person">I.2. Add an activity to a person.</a></h3>
@@ -2398,5 +2473,35 @@ Expected: Similar to previous.</p>
 </ol>
 </div>
 </div>
+<div class="sect2">
+<h3 id="adding-an-event"><a class="link" href="#adding-an-event">I.3. Adding an event</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Adding an event to the event calendar</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: <code>addevent ett/UBS - Unlock Your Potential with us ed/01/04/2019 etm/15:00-16:00 ev/UBS Office</code>
+Expected: the event will be successfully added even though there are some missing input arguments, because the rest of the arguments are optional.</p>
+</li>
+<li>
+<p>Test case: <code>addevent ett/UBS - Unlock Your Potential with us ed/01/04/2019 etm/15:00-16:00 eta/All Year 1 female students edc/Business Formal eds/Unlock Your Potential with us.</code>
+Expected: the event will not be successfully added because the <code>ev/</code> argument which is compulsory is missing.</p>
+</li>
+<li>
+<p>Test case: <code>addevent ett/UBS - Unlock Your Potential with us ed/29/02/2019 etm/15:00-16:00 ev/UBS Office</code>
+Expected: the error message will be shown indicating wrong date (there is no 29th February in 2019).</p>
+</li>
+<li>
+<p>Other incorrect addevent commands to try: starting time without end time, impossible time (HH more than 24 and MM more than 60)
+Expected: the error message will be shown indicating wrong time.</p>
+</li>
+</ol>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-14 15:23:47 UTC</div></div></div></body></html>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-04-14 15:56:28 UTC</div></div></div></body></html>
