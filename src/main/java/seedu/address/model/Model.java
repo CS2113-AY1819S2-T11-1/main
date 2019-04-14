@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.timetable.TimeTable;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -76,6 +77,17 @@ public interface Model {
     void addPerson(Person person);
 
     /**
+     * Adds the given person.
+     * {@code person} must not already exist in the address book.
+     */
+    //void addActivity(Activity activity);
+
+    /**
+     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     */
+    //boolean hasActivity(Activity activity);
+
+    /**
      * Replaces the given person {@code target} with {@code editedPerson}.
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
@@ -93,6 +105,8 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    TimeTable getTimeTable(int index);
 
     /**
      * Returns true if the model has previous address book states to restore.
@@ -168,9 +182,6 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered event list */
     ObservableList<Event> getFilteredEventList();
-
-    /** Generate a timetable based on the concept of interleaving */
-    void interleave();
 
     /**
      * Selected event in the filtered event list.

@@ -6,17 +6,21 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.address.logic.commands.AddActivityCommand;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddEventCommand;
+import seedu.address.logic.commands.CheckAvailabilityCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.EventCheckAvailabilityCommand;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FilterEventCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
-import seedu.address.logic.commands.InterleaveCommand;
+import seedu.address.logic.commands.ListActivityCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListEventCommand;
 import seedu.address.logic.commands.RedoCommand;
@@ -54,8 +58,17 @@ public class AddressBookParser {
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
+        case CheckAvailabilityCommand.COMMAND_WORD:
+            return new CheckAvailabilityCommandParser().parse(arguments);
+
+        case AddActivityCommand.COMMAND_WORD:
+            return new AddActivityCommandParser().parse(arguments);
+
+        case EditCommand.EDIT_COMMAND:
+            return new EditCommandParser(EditCommand.EDIT_COMMAND).parse(arguments);
+
+        case EditCommand.INTERLEAVE_COMMAND:
+            return new EditCommandParser(EditCommand.INTERLEAVE_COMMAND).parse(arguments);
 
         case SelectCommand.COMMAND_WORD:
             return new SelectCommandParser().parse(arguments);
@@ -99,8 +112,14 @@ public class AddressBookParser {
         case AddEventCommand.COMMAND_WORD:
             return new AddEventCommandParser().parse(arguments);
 
-        case InterleaveCommand.COMMAND_WORD:
-            return new InterleaveCommand();
+        case FilterEventCommand.COMMAND_WORD:
+            return new FilterEventCommandParser().parse(arguments);
+
+        case ListActivityCommand.COMMAND_WORD:
+            return new ListActivityCommandParser().parse(arguments);
+
+        case EventCheckAvailabilityCommand.COMMAND_WORD:
+            return new EventCheckAvailabilityCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

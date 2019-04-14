@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -36,6 +37,7 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private EventListPanel eventListPanel;
+    private ArrayList<ActivityListPanel> activityListPanel = new ArrayList<>();
 
     @FXML
     private StackPane browserPlaceholder;
@@ -80,7 +82,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Sets the accelerator of a MenuItem.
-     * @param keyCombination the KeyCombination value of the accelerator
+     * @param keyCombination the KeyCombination moduleCode of the accelerator
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
         menuItem.setAccelerator(keyCombination);
@@ -123,6 +125,13 @@ public class MainWindow extends UiPart<Stage> {
                 logic::setSelectedEvent);
         eventListPanel.getRoot().setVisible(false);
         personListPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
+
+        for (int index = 0; index < logic.getFilteredPersonList().size(); index++) {
+            System.out.println("fill inner parts, creating activity list panels");
+            activityListPanel.add(new ActivityListPanel(logic.getTimeTable(index)));
+            activityListPanel.get(index).getRoot().setVisible(false);
+            personListPanelPlaceholder.getChildren().add(activityListPanel.get(index).getRoot());
+        }
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -198,14 +207,41 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             //@@author windrichie
+            if (commandResult.getView() == 0) {
+                eventListPanel.getRoot().setVisible(false);
+                for (ActivityListPanel list : activityListPanel) {
+                    list.getRoot().setVisible(false);
+                }
+                personListPanel.getRoot().setVisible(true);
+            }
+
             if (commandResult.getView() == 1) {
                 personListPanel.getRoot().setVisible(false);
+                for (ActivityListPanel list : activityListPanel) {
+                    list.getRoot().setVisible(false);
+                }
                 eventListPanel.getRoot().setVisible(true);
             }
 
-            if (commandResult.getView() == 0) {
+            if (commandResult.getView() == 2) {
                 eventListPanel.getRoot().setVisible(false);
-                personListPanel.getRoot().setVisible(true);
+                personListPanel.getRoot().setVisible(false);
+                for (ActivityListPanel list : activityListPanel) {
+                    list.getRoot().setVisible(false);
+                }
+
+                if (commandResult.getPersonIndex() > -1) {
+                    int personIndex = commandResult.getPersonIndex();
+                    if (personIndex >= activityListPanel.size()) {
+                        ActivityListPanel newPanel = new ActivityListPanel(logic.getTimeTable(personIndex));
+                        activityListPanel.add(personIndex, newPanel);
+                    } else {
+                        ActivityListPanel updatedPanel = new ActivityListPanel(logic.getTimeTable(personIndex));
+                        activityListPanel.set(personIndex, updatedPanel);
+                    }
+                    personListPanelPlaceholder.getChildren().add(activityListPanel.get(personIndex).getRoot());
+                    activityListPanel.get(commandResult.getPersonIndex()).getRoot().setVisible(true);
+                }
             }
 
             return commandResult;

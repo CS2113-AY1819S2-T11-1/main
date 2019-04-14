@@ -19,6 +19,7 @@ import seedu.address.model.event.Event;
 import seedu.address.model.event.exceptions.EventNotFoundException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.person.timetable.TimeTable;
 import seedu.address.model.tag.Tag;
 
 
@@ -37,7 +38,7 @@ public class ModelManager implements Model {
     private final SimpleObjectProperty<Event> selectedEvent = new SimpleObjectProperty<>();
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given addressBook, eventCalendar and userPrefs.
      */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs,
                         ReadOnlyEventCalendar eventCalendar) {
@@ -51,7 +52,7 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
         filteredPersons.addListener(this::ensureSelectedPersonIsValid);
         this.eventCalendar = new EventCalendar(eventCalendar);
-        filteredEvents = new FilteredList<>(eventCalendar.getEventList());
+        filteredEvents = new FilteredList<>(this.eventCalendar.getEventList());
         filteredEvents.addListener(this::ensureSelectedEventIsValid);
     }
 
@@ -162,6 +163,25 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    /**
+     *
+     * Returns TimeTable object from a person with @param index in filteredPersons list
+     */
+    @Override
+    public TimeTable getTimeTable(int index) {
+        Person person = filteredPersons.get(index);
+        // System.out.println(person.getName() + " timetable fetched.");
+        String[][] timetable = person.getTimeTable().getTimeTableArray();
+        //        for (int row = 0; row < timetable.length; row++) {
+        //            for (int col = 0; col < timetable[row].length; col++) {
+        //                if (timetable[row][col] != null) {
+        //                     System.out.println("row: " + row + " col: " + col + " val: " + timetable[row][col]);
+        //                }
+        //            }
+        //        }
+        return person.getTimeTable();
+    }
+
     //=========== Undo/Redo =================================================================================
 
     @Override
@@ -222,7 +242,7 @@ public class ModelManager implements Model {
             boolean wasSelectedPersonReplaced = change.wasReplaced() && change.getAddedSize() == change.getRemovedSize()
                     && change.getRemoved().contains(selectedPerson.getValue());
             if (wasSelectedPersonReplaced) {
-                // Update selectedPerson to its new value.
+                // Update selectedPerson to its new moduleCode.
                 int index = change.getRemoved().indexOf(selectedPerson.getValue());
                 selectedPerson.setValue(change.getAddedSubList().get(index));
                 continue;
@@ -295,10 +315,6 @@ public class ModelManager implements Model {
 
     //=========== Selected person ===========================================================================
 
-    public void interleave() {
-        //Interleaver.extractSelfStudyHours();
-    }
-
     /**
      * Ensures {@code selectedEvent} is a valid event in {@code filteredEvents}.
      */
@@ -312,7 +328,7 @@ public class ModelManager implements Model {
             boolean wasSelectedEventReplaced = change.wasReplaced() && change.getAddedSize() == change.getRemovedSize()
                     && change.getRemoved().contains(selectedEvent.getValue());
             if (wasSelectedEventReplaced) {
-                // Update selectedEvent to its new value.
+                // Update selectedEvent to its new moduleCode.
                 int index = change.getRemoved().indexOf(selectedEvent.getValue());
                 selectedEvent.setValue(change.getAddedSubList().get(index));
                 continue;

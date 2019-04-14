@@ -18,9 +18,13 @@ import seedu.address.model.event.Title;
 import seedu.address.model.event.Venue;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.Module;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.modulelist.ModuleList;
+import seedu.address.model.person.timetable.Activity;
+import seedu.address.model.person.timetable.Day;
+import seedu.address.model.person.timetable.StartTime;
+import seedu.address.model.person.timetable.TimeTable;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -56,6 +60,51 @@ public class ParserUtil {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
         return new Name(trimmedName);
+    }
+
+    /**
+     * Parses a {@code String activity} into a {@code Activity}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code activity} is invalid.
+     */
+    public static Activity parseActivity(String activity) throws ParseException {
+        requireNonNull(activity);
+        String trimmedActivity = activity.trim();
+        if (!Activity.isValidActivity(trimmedActivity)) {
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        }
+        return new Activity(activity);
+    }
+
+    /**
+     * Parses a {@code String day} into a {@code Day}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code day} is invalid.
+     */
+    public static Day parseDay(String day) throws ParseException {
+        requireNonNull(day);
+        String trimmedActivity = day.trim();
+        if (!Day.isValidDay(trimmedActivity)) {
+            throw new ParseException(Day.MESSAGE_CONSTRAINTS);
+        }
+        return new Day(day);
+    }
+
+    /**
+     * Parses a {@code String startTime} into a {@code StartTime}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code startTime} is invalid.
+     */
+    public static StartTime parseStartTime(String startTime) throws ParseException {
+        requireNonNull(startTime);
+        String trimmedActivity = startTime.trim();
+        if (!StartTime.isValidStartTime(trimmedActivity)) {
+            throw new ParseException(StartTime.MESSAGE_CONSTRAINTS);
+        }
+        return new StartTime(startTime);
     }
 
     /**
@@ -120,6 +169,18 @@ public class ParserUtil {
     }
 
     /**
+     * Parses {@code Collection<String> modules} into a {@code Set<modulelist>}.
+     */
+    public static ModuleList parseModules(Collection<String> modules) throws ParseException {
+        requireNonNull(modules);
+        final ModuleList moduleSet = new ModuleList();
+        for (String module : modules) {
+            moduleSet.add(parseModule(module));
+        }
+        return moduleSet;
+    }
+
+    /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -144,6 +205,21 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses {@code String day}, {@code String time}, {@code String activity}
+     * into a {@code TimeTable}.
+     *
+     * @throws ParseException if the given parameters is invalid.
+     */
+    public static TimeTable parseTimetable(String day, String time, String activity) throws ParseException {
+        requireNonNull(day);
+        requireNonNull(time);
+        requireNonNull(activity);
+        final TimeTable table = new TimeTable();
+        table.add(new Activity(activity), Integer.parseInt(day), Integer.parseInt(time));
+        return table;
     }
 
     //@@author windrichie
@@ -258,5 +334,4 @@ public class ParserUtil {
         }
         return new Description(trimmedDescription);
     }
-
 }

@@ -26,6 +26,7 @@ import seedu.address.model.ReadOnlyEventCalendar;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.timetable.TimeTable;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
@@ -166,6 +167,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public TimeTable getTimeTable(int index) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean canUndoAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
@@ -241,11 +247,6 @@ public class AddCommandTest {
 
         @Override
         public ObservableList<Event> getFilteredEventList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void interleave() {
             throw new AssertionError("This method should not be called.");
         }
 

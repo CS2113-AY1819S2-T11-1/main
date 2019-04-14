@@ -19,6 +19,8 @@ public class CommandResult {
 
     private final int view;
 
+    private final int personIndex;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
@@ -27,11 +29,12 @@ public class CommandResult {
         this.showHelp = showHelp;
         this.exit = exit;
         this.view = 0;
+        this.personIndex = 0;
     }
 
     /**
      * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
-     * and other fields set to their default value.
+     * and other fields set to their default moduleCode.
      */
     public CommandResult(String feedbackToUser) {
         this(feedbackToUser, false, false, 0);
@@ -45,6 +48,15 @@ public class CommandResult {
         this.showHelp = showHelp;
         this.exit = exit;
         this.view = view;
+        this.personIndex = 0;
+    }
+
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, int view, int personIndex) {
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.showHelp = showHelp;
+        this.exit = exit;
+        this.view = view;
+        this.personIndex = personIndex;
     }
 
     public String getFeedbackToUser() {
@@ -61,6 +73,10 @@ public class CommandResult {
 
     public int getView() {
         return view;
+    }
+
+    public int getPersonIndex() {
+        return personIndex;
     }
 
     @Override
