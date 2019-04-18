@@ -5,7 +5,6 @@ import java.util.Iterator;
 import java.util.Stack;
 
 import seedu.address.model.person.Person;
-import seedu.address.model.person.modulelist.Module;
 import seedu.address.model.person.timetable.Activity;
 import seedu.address.model.person.timetable.TimeTable;
 

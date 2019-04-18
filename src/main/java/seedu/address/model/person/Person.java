@@ -7,7 +7,6 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.model.person.modulelist.Module;
 import seedu.address.model.person.modulelist.ModuleList;
 import seedu.address.model.person.timetable.TimeTable;
 import seedu.address.model.tag.Tag;

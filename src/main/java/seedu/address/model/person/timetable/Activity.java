@@ -1,7 +1,6 @@
 package seedu.address.model.person.timetable;
 
 import seedu.address.model.event.Event;
-import seedu.address.model.person.modulelist.Module;
 
 /**
  * Represents an activity in the Learning Scheduler.

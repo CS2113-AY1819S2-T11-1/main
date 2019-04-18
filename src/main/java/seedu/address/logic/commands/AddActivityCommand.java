@@ -15,7 +15,6 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.modulelist.Module;
 import seedu.address.model.person.timetable.Activity;
 
 /**

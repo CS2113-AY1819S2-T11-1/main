@@ -20,7 +20,6 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.modulelist.Module;
 import seedu.address.model.person.modulelist.ModuleList;
 import seedu.address.model.person.timetable.Activity;
 import seedu.address.model.person.timetable.Day;
@@ -164,9 +163,9 @@ public class ParserUtil {
         requireNonNull(module);
         String trimmedModule = module.trim();
         if (!Module.isValidModule(trimmedModule)) {
-            throw new ParseException(Module.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Module.TITLE_CONSTRAINS);
         }
-        return new Module(trimmedModule);
+        return new Module(trimmedModule,trimmedModule);
     }
 
     /**
